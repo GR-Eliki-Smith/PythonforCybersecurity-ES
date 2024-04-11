@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # A simple "Hello World" script in python with Inputs
-# Created 
+# Created by ED 4/11/24
 
-# Suggestion, build out 1 line at a time
-# Once multiple print statemetns exist, put a breakpoint at first print line
-# Then walk through as an example of "debugging"
+# Ask the user for their name
+user_name = input("What is your name? ")
+
+# Say hello to the user
+print("Hello", user_name)
