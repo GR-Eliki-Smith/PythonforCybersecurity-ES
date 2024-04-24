@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 # example working with Functions
-#By Eliki Smith - 4/23/24
+#By Eliki Smith - 4/24/24
 
-def printme(mystr):
-    print (mystr)
+def send_message():
+    for i in range(5):
+        print("Yeah it is")
 
-printme ("string")
-printme ("I am the very model of the modern major general")
+user_input = input("Is the sky blue? (yes/no) ")
+
+if user_input.lower() == "yes":
+    send_message()
+else:
+    print("Okay, maybe another time.")
