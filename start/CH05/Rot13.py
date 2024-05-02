@@ -5,6 +5,7 @@
 #Ask for Message
 message = input("What is the message? ")
 message = message.lower()
+new_message = ""
 #Foreach Letter
 for letter in message:
     print(letter)
@@ -19,6 +20,8 @@ for letter in message:
             #Sub 26
             letter_number -= 26
     #Change to letter
-    print(letter_number)
+    #print( chr(letter_number),end='' )
+    new_message = new_message + chr(letter_number)
+
 # Print message
-#print(new_message)
+print(new_message)
