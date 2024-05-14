@@ -2,32 +2,26 @@
 # Script that performs a dictionary attack against known password hashes
 # Needs a dictionary file, suggested to use https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials
 # By Eliki Smith - 5/10/24
+import crypt
+import os
 
-import hashlib
+file_path = os.path.dirname(__file__)
 
-def read_file(file_path):
-    with open(file_path, 'r') as file:
-        return file.readlines()
+#ask for ID and salt
+id_salt = input ("what is the id and salt? ")
+#ask for fully salted hash
+salted_pass = input ("What is the fully salted hash? ")
 
-def find_passwords(shadow_file, password_list):
-    passwords_found = []
-    shadow_hashes = [line.strip().split(':')[1] for line in shadow_file]
-    
-    for password in password_list:
-        hashed_password = hashlib.sha256(password.strip().encode()).hexdigest()
-        if hashed_password in shadow_hashes:
-            passwords_found.append(password.strip())
-    
-    return passwords_found
+#open password file
+f = open(file_path + "/10-million-password-list-top-1000000.txt", "r")
+# for each guess in pass file
+for guess in f:
+    guess = guess.strip()
 
-shadow_file_path = '/home/justincase/PythonforCybersecurity-ES/start/CH06/shadow.txt'
-password_list_path = '/home/justincase/PythonforCybersecurity-ES/start/CH06/10-million-password-list-top-1000000.txt'
-
-shadow_file = read_file(shadow_file_path)
-password_list = read_file(password_list_path)
-
-found_passwords = find_passwords(shadow_file, password_list)
-
-with open('found_passwords.txt', 'w') as output_file:
-    for password in found_passwords:
-        output_file.write(password + '\n')
+    #Hash the guesses
+    hashed_guess = crypt.crypt( guess, id_salt )
+    #is guess = to target?
+    if hashed_guess == salted_pass:
+        #print guess and quit
+        print(guess)
+        exit()
