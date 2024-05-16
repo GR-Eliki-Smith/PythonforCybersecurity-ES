@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Script that scans web server logs for clients
+# Script that scans web server logs for Emails
 # Use RegEx to find and report on most frequent status messages
 # By Eliki Smith - 05/14/24
 import os
 import re
 
 #setup pattern to match
-re_pattern = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+re_pattern = r'\S+@\S+\.\S+'
 
 file_path = os.path.dirname (__file__)
 #prompt for filename
@@ -33,5 +33,5 @@ while True:
             #else, add to dictionary
             results_dict[item] = 1
 
-for w in sorted(results_dict, key = results_dict.get, reverse = False):
-    print (w, results_dict[w])
+        for w in sorted(results_dict, key = results_dict.get, reverse = True):
+            print (w, results_dict[w])
